@@ -1,0 +1,34 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:revision/core/constants.dart';
+import 'package:revision/core/errors/exceptions.dart';
+import 'package:revision/data/models/anime_show_model.dart';
+
+class AnimeRemoteDataSource {
+  Future<List<AnimeShowModel>> getAnimeShows({
+    int pageNumber = 1,
+    int pageSize = 10,
+    int version = 1,
+    String name = '',
+  }) async {
+    try {
+      var url =
+          '${GlobalConstants.baseUrl}api/v$version/animeshows?PageSize=$pageSize&PageNumber=$pageNumber&Title=$name';
+      var response = await http.get(Uri.parse(url));
+      if (response.statusCode != 200) {
+        var errorData = json.decode(response.body);
+        throw ServerException(errorData['message'], errorData['statusCode']);
+      }
+
+      final Map<String, dynamic> data = json.decode(response.body);
+
+      final List<AnimeShowModel> animeShowsList =
+          (data['items'] as List)
+              .map((json) => AnimeShowModel.fromJson(json))
+              .toList();
+      return animeShowsList;
+    } catch (ex) {
+      rethrow;
+    }
+  }
+}
