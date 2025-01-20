@@ -18,9 +18,9 @@ class AnimeShowModel {
   factory AnimeShowModel.fromJson(Map<String, dynamic> json) {
     return AnimeShowModel(
       id: json['id'],
-      name: json['name'],
+      name: json['title'],
       description: json['description'] ?? 'No description for this anime',
-      rate: json['rate'],
+      rate: json['rating'] ?? 0.0,
       imageUrl: json['imageUrl'] ?? 'https://placehold.co/600x400',
       categoryId: json['categoryId'],
     );

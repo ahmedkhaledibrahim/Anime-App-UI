@@ -12,9 +12,17 @@ class AnimeRemoteDataSource {
     String name = '',
   }) async {
     try {
-      var url =
-          '${GlobalConstants.baseUrl}api/v$version/animeshows?PageSize=$pageSize&PageNumber=$pageNumber&Title=$name';
-      var response = await http.get(Uri.parse(url));
+      final url = Uri.parse(
+        '${GlobalConstants.baseUrl}api/v$version/AnimeShows?PageNumber=$pageNumber&PageSize=$pageSize&Title=$name',
+      );
+      var response = await http.get(
+        url,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          'Content-Type': 'application/json',
+          'Accept': '*/*',
+        },
+      );
       if (response.statusCode != 200) {
         var errorData = json.decode(response.body);
         throw ServerException(errorData['message'], errorData['statusCode']);
