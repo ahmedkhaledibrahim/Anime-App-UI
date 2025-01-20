@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:revision/core/dependency_injection/injection.dart';
-import 'package:revision/data/repos/anime_repo_impl.dart';
-import 'package:revision/domain/use_cases/get_anime_shows.dart';
 import 'package:revision/presentation/cubit/cubit/anime_shows_cubit.dart';
 import 'package:revision/presentation/screens/anime_shows_screen.dart';
 
