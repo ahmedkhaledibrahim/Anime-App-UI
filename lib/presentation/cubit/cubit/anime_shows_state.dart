@@ -12,9 +12,10 @@ final class AnimeShowsInitial extends AnimeShowsState {}
 final class AnimeShowsLoading extends AnimeShowsState {}
 
 final class AnimeShowsLoaded extends AnimeShowsState {
-  final List<AnimeShow> shows;
+  final PaginatedResultModel shows;
+  final String sortOrder;
 
-  const AnimeShowsLoaded(this.shows);
+  const AnimeShowsLoaded(this.shows, {this.sortOrder = "Ascending"});
 
   @override
   List<Object> get props => [shows];

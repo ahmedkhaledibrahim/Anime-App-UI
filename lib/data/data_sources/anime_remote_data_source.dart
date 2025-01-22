@@ -3,9 +3,10 @@ import 'package:http/http.dart' as http;
 import 'package:revision/core/constants.dart';
 import 'package:revision/core/errors/exceptions.dart';
 import 'package:revision/data/models/anime_show_model.dart';
+import 'package:revision/data/models/paginated_result_model.dart';
 
 class AnimeRemoteDataSource {
-  Future<List<AnimeShowModel>> getAnimeShows({
+  Future<PaginatedResultModel<AnimeShowModel>> getAnimeShows({
     int pageNumber = 1,
     int pageSize = 10,
     int version = 1,
@@ -30,11 +31,9 @@ class AnimeRemoteDataSource {
 
       final Map<String, dynamic> data = json.decode(response.body);
 
-      final List<AnimeShowModel> animeShowsList =
-          (data['items'] as List)
-              .map((json) => AnimeShowModel.fromJson(json))
-              .toList();
-      return animeShowsList;
+      final PaginatedResultModel<AnimeShowModel> paginatedAnimeShowsList =
+          PaginatedResultModel.fromJson(data, AnimeShowModel.fromJson);
+      return paginatedAnimeShowsList;
     } catch (ex) {
       rethrow;
     }
