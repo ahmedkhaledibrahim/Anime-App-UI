@@ -30,9 +30,15 @@ http: For making API calls.
 
 Main Screen
 ![Main Screen](assets/main_screen-1.png)
+
+
 Pagination
 ![Pagination](assets/main_screen-2.png)
+
+
 Sorting
 ![Sorting](assets/rate-sort.png)
+
+
 Searching
 ![Searching](assets/search.png)
